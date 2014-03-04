@@ -43,6 +43,10 @@ it "should accept a bike" do
     expect(holder).to be_empty
   end
 
+  it "should not release a bike if it's empty" do
+    expect{holder.release(bike)}.to raise_error(RuntimeError)
+  end
+
   def fill_holder(holder)
     holder.capacity.times { holder.dock(Bike.new) }
   end
