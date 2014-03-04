@@ -39,6 +39,10 @@ it "should accept a bike" do
     expect(holder.available_bikes).to eq([working_bike])
   end
 
+  it "should know when it's empty" do
+    expect(holder).to be_empty
+  end
+
   def fill_holder(holder)
     holder.capacity.times { holder.dock(Bike.new) }
   end
