@@ -19,6 +19,7 @@ module BikeContainer
   end
 
   def dock(bike)
+    raise "This station is only for bikes" if !(bike.is_a?(Bike))
     raise "Station is full" if full?
     bikes << bike
   end
@@ -39,5 +40,5 @@ module BikeContainer
   def empty?
     bike_count == 0
   end
-  
+
 end

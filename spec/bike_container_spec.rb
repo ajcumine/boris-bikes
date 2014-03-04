@@ -8,7 +8,7 @@ describe BikeContainer do
   let(:holder) {ContainerHolder.new}
 
 
-it "should accept a bike" do        
+  it "should accept a bike" do        
     expect(holder.bike_count).to eq(0)
     holder.dock(bike)    
     expect(holder.bike_count).to eq(1)
@@ -45,6 +45,10 @@ it "should accept a bike" do
 
   it "should not release a bike if it's empty" do
     expect{holder.release(bike)}.to raise_error(RuntimeError)
+  end
+
+  it "should know if something is not a bike" do
+    expect{holder.dock("notabike")}.to raise_error(RuntimeError)
   end
 
   def fill_holder(holder)
