@@ -53,6 +53,13 @@ describe BikeContainer do
     expect{holder.release("notabike")}.to raise_error(RuntimeError)
   end
 
+  it "should provide a list of broken bikes" do
+    broken_bike = Bike.new
+    broken_bike.break
+    holder.dock(broken_bike)
+    expect(holder.broken_bikes_docked).to eq([broken_bike])
+  end
+
   def fill_holder(holder)
     holder.capacity.times { holder.dock(Bike.new) }
   end

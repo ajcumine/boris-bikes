@@ -42,4 +42,8 @@ module BikeContainer
     bike_count == 0
   end
 
+  def broken_bikes_docked
+    bikes.reject {|bike| !bike.broken?}
+  end
+
 end
