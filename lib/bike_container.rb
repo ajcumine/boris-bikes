@@ -19,13 +19,13 @@ module BikeContainer
   end
 
   def dock(bike)
-    raise "This station is only for bikes" if !(bike.is_a?(Bike))
+    only_bikes(bike)
     raise "Station is full" if full?
     bikes << bike
   end
 
   def release(bike)
-    raise "This station is only for bikes" if !(bike.is_a?(Bike))
+    only_bikes(bike)
     raise "Station is empty" if empty?
     bikes.delete(bike)
   end
@@ -44,6 +44,10 @@ module BikeContainer
 
   def broken_bikes_docked
     bikes.reject {|bike| !bike.broken?}
+  end
+
+  def only_bikes(bike)
+    raise "This station is only for bikes" if !(bike.is_a?(Bike))
   end
 
 end
