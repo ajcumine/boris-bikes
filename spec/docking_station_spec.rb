@@ -13,11 +13,19 @@ describe DockingStation do
   end
 
   it "should release all the broken bikes to the van" do
-    broken_bike = Bike.new
+    working_bike, broken_bike = Bike.new, Bike.new
     broken_bike.break
+    station.dock(working_bike)
     station.dock(broken_bike)
-    expect(station.broken_bikes_docked).to eq([broken_bike])
-    # expect(station.release_to_van)
+    expect(station.release_to_van).to eq([working_bike])
   end
+
+  it "should accept all the bikes from the van" do
+    working_bike = Bike.new
+    van_accept = [working_bike, working_bike, working_bike]
+    station.accept_from_van(van_accept)
+    expect(station.available_bikes).to eq([working_bike, working_bike, working_bike])
+  end
+
 
 end
