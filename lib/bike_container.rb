@@ -25,6 +25,7 @@ module BikeContainer
   end
 
   def release(bike)
+    raise "This station is only for bikes" if !(bike.is_a?(Bike))
     raise "Station is empty" if empty?
     bikes.delete(bike)
   end

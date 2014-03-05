@@ -49,6 +49,8 @@ describe BikeContainer do
 
   it "should know if something is not a bike" do
     expect{holder.dock("notabike")}.to raise_error(RuntimeError)
+    holder.dock(bike)
+    expect{holder.release("notabike")}.to raise_error(RuntimeError)
   end
 
   def fill_holder(holder)
