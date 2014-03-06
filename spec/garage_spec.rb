@@ -18,17 +18,11 @@ describe Garage do
     expect(garage.release_to_van(van)).to eq([working_bike])
   end
 
-  it "should accept all the bikes from the van" do
-    working_bike, van = Bike.new, Van.new
-    3.times {van.dock(working_bike)}
-    expect(garage.accept_from_van(van)).to eq([working_bike, working_bike, working_bike])
-  end
-
-  it "should fix bikes" do
-    fixed_bike = Bike.new
+  it "should accept and fix all the bikes from the van" do
+    fixed_bike, van = Bike.new, Van.new
     fixed_bike.break
-    2.times {garage.dock(fixed_bike)}
-    expect(garage.fix_bikes).to eq([fixed_bike, fixed_bike])
+    3.times {van.dock(fixed_bike)}
+    expect(garage.accept_from_van(van)).to eq([fixed_bike, fixed_bike, fixed_bike])
   end
 
 end
