@@ -5,6 +5,12 @@ require "./lib/bike"
 require "./lib/garage"
 
 describe Van do
+
+  let(:van) { Van.new(:capacity => 123)}
+
+  it "should allow setting default capacity on initialising" do
+    expect(van.capacity).to eq(123)
+  end
   
   it "should collect broken bikes from the station" do
     station, van, broken_bike = DockingStation.new, Van.new, Bike.new
@@ -22,5 +28,23 @@ describe Van do
     expect(van.bikes).to include(working_bike)
     expect(garage).to be_empty
   end
+
+  it "should release broken bikes to the garage" do
+    garage, van, broken_bike = Garage.new, Van.new, Bike.new
+    broken_bike.break
+    van.dock(broken_bike)
+    van.release_broken_bikes_to_garage(garage)
+    expect(van).to be_empty
+    expect(garage.bikes).to include(broken_bike)
+  end
+
+  it "should release working bikes to the station" do
+    station, van, working_bike = DockingStation.new, Van.new, Bike.new
+    van.dock(working_bike)
+    van.release_working_bikes_to_station(station)
+    expect(van).to be_empty
+    expect(station.bikes).to include(working_bike)
+  end
+
 
 end
